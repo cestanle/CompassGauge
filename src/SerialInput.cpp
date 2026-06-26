@@ -85,8 +85,13 @@ void SerialInput::processLine(const QByteArray& line)
     adc0 = qBound(0, adc0, 4095);
     adc1 = qBound(0, adc1, 4095);
 
-    int compassFrame = adc0 * 359 / 4095;
-    int cueFrame     = adc1 * 359 / 4095;
+    static constexpr int AdcMax = 4095;
+
+    static constexpr int CompassTurnsScale = 50;
+    static constexpr int CueTurnsScale     = 50;
+
+    int compassFrame = (adc0 * 360 * CompassTurnsScale / AdcMax) % 360;
+    int cueFrame = (adc1 * 360 * CueTurnsScale / AdcMax) % 360;
 
     m_cluster->setCompassFrame(compassFrame);
     m_cluster->setCueFrame(cueFrame);
