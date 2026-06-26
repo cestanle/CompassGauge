@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Window
-import GaugeCluster
+import GaugeQML
 
 Window {
     id: root
@@ -10,12 +10,16 @@ Window {
     visible: true
     title: "Gauge Cluster Prototype"
 
-    color: "#101014"
+    color: "black"
 
     CompassGauge {
         id: compassGauge
+
         anchors.centerIn: parent
         width: 768
         height: 768
+
+        compassFrame: cluster ? cluster.compassFrame : 0
+        cueFrame: cluster ? cluster.cueFrame : 0
     }
 }

@@ -1,0 +1,16 @@
+{
+  "name": "cue",
+  "frameWidth": 768,
+  "frameHeight": 768,
+  "frames": 361,
+  "columns": 10,
+  "rows": 9,
+  "framesPerSheet": 90,
+  "sheets": [
+    "cue_sheet_0.png",
+    "cue_sheet_1.png",
+    "cue_sheet_2.png",
+    "cue_sheet_3.png",
+    "cue_sheet_4.png"
+  ]
+}
