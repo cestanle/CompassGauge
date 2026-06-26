@@ -40,7 +40,7 @@ Item {
         height: parent.height
 
         basePath: assetRoot + "/compass"
-        sheetPrefix: "sprite_sheet"
+        sheetPrefix: "compass_sheet"
 
         frameWidth: 768
         frameHeight: 768
