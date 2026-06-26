@@ -1,0 +1,16 @@
+{
+  "name": "compass",
+  "frameWidth": 768,
+  "frameHeight": 768,
+  "frames": 361,
+  "columns": 10,
+  "rows": 9,
+  "framesPerSheet": 90,
+  "sheets": [
+    "compass_sheet_0.png",
+    "compass_sheet_1.png",
+    "compass_sheet_2.png",
+    "compass_sheet_3.png",
+    "compass_sheet_4.png"
+  ]
+}
