@@ -5,21 +5,26 @@ import GaugeQML
 Window {
     id: root
 
-    width: 768
-    height: 768
     visible: true
+    visibility: Window.FullScreen
     title: "Gauge Cluster Prototype"
 
     color: "black"
 
-    CompassGauge {
-        id: compassGauge
+    Item {
+        id: designSurface
 
-        anchors.centerIn: parent
         width: 768
         height: 768
+        anchors.centerIn: parent
 
-        compassFrame: cluster ? cluster.compassFrame : 0
-        cueFrame: cluster ? cluster.cueFrame : 0
+        CompassGauge {
+            id: compassGauge
+
+            anchors.fill: parent
+
+            compassFrame: cluster ? cluster.compassFrame : 0
+            cueFrame: cluster ? cluster.cueFrame : 0
+        }
     }
 }
