@@ -87,15 +87,35 @@ void SerialInput::processLine(const QByteArray& line)
 
     static constexpr int AdcMax = 4095;
 
-    static constexpr int CompassTurnsScale = 50;
-    static constexpr int CueTurnsScale     = 50;
+    /*
+        Scale notes:
+
+        1  = one full pot sweep maps to one 360-degree rotation.
+        50 = one full pot sweep maps to 50 rotations.
+
+        50 is very sensitive and will make tiny ADC changes create large
+        visual jumps. Good for testing movement, bad for smoothness.
+    */
+    static constexpr int CompassTurnsScale = 1;
+    static constexpr int CueTurnsScale     = 1;
 
     int compassFrame = (adc0 * 360 * CompassTurnsScale / AdcMax) % 360;
-    int cueFrame = (adc1 * 360 * CueTurnsScale / AdcMax) % 360;
+    int cueFrame     = (adc1 * 360 * CueTurnsScale     / AdcMax) % 360;
 
-    m_cluster->setCompassFrame(compassFrame);
-    m_cluster->setCueFrame(cueFrame);
+    // Only update QML when the displayed frame actually changes.
+    if (compassFrame != m_cluster->compassFrame()) {
+        m_cluster->setCompassFrame(compassFrame);
+    }
 
-    qDebug() << "ADC:" << adc0 << adc1
-             << "frames:" << compassFrame << cueFrame;
+    if (cueFrame != m_cluster->cueFrame()) {
+        m_cluster->setCueFrame(cueFrame);
+    }
+
+    // Throttled debug print. Do not log every serial packet.
+    static int debugCounter = 0;
+
+    if (++debugCounter % 60 == 0) {
+        qDebug() << "ADC:" << adc0 << adc1
+                 << "frames:" << compassFrame << cueFrame;
+    }
 }
