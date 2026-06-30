@@ -15,11 +15,16 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    const QString assetDir =
-        QCoreApplication::applicationDirPath() + "/assets";
+    QString assetDir =
+    QCoreApplication::applicationDirPath() + "/assets";
+
+    // Yocto/runtime install location
+    if (!QFileInfo(assetDir + "/background/0000.png").exists()) {
+        assetDir = "/usr/share/gauge-cluster/assets";
+    }
 
     const QString assetRoot =
-        QUrl::fromLocalFile(assetDir).toString();
+    QUrl::fromLocalFile(assetDir).toString();
 
     qDebug() << "assetDir:" << assetDir;
     qDebug() << "assetRoot:" << assetRoot;
